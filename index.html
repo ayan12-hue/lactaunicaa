@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lactaunica </title>
+  <title>Lactaunica - Online Store</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     body {
@@ -33,6 +33,12 @@
     }
     header .icons {
       font-size: 1.2rem;
+      display: flex;
+      gap: 20px;
+      cursor: pointer;
+    }
+    header .icons div {
+      position: relative;
     }
     nav {
       background-color: #37475a;
@@ -47,11 +53,29 @@
       text-decoration: none;
       font-size: 0.9rem;
     }
-    .banner {
+    .slider {
+      position: relative;
       width: 100%;
       height: 300px;
-      background: url('https://via.placeholder.com/1200x300?text=Your+Banner+Here') center/cover no-repeat;
-      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    .slides {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      animation: slide 15s infinite;
+    }
+    .slide {
+      width: 100%;
+      flex-shrink: 0;
+      background-size: cover;
+      background-position: center;
+    }
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      33% { transform: translateX(-100%); }
+      66% { transform: translateX(-200%); }
+      100% { transform: translateX(0); }
     }
     .section {
       padding: 1rem;
@@ -95,6 +119,23 @@
       padding: 1rem;
       margin-top: 2rem;
     }
+    #cartModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    #cartModal .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: left;
+    }
   </style>
 </head>
 <body>
@@ -104,8 +145,8 @@
       <input type="text" placeholder="Search for products...">
     </div>
     <div class="icons">
-      <i class="fas fa-user"></i> &nbsp;
-      <i class="fas fa-shopping-cart"></i>
+      <div onclick="alert('Account system coming soon!')"><i class="fas fa-user"></i></div>
+      <div onclick="toggleCart()"><i class="fas fa-shopping-cart"></i></div>
     </div>
   </header>
 
@@ -117,7 +158,13 @@
     <a href="#">Accessories</a>
   </nav>
 
-  <div class="banner"></div>
+  <div class="slider">
+    <div class="slides">
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1606813902760-8e93fb52e222?auto=format&fit=crop&w=1200&q=80');"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=1200&q=80');"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1589902713626-9b63b8b164e1?auto=format&fit=crop&w=1200&q=80');"></div>
+    </div>
+  </div>
 
   <section class="section">
     <h2>Top Picks for You</h2>
@@ -156,6 +203,15 @@
     </div>
   </section>
 
+  <div id="cartModal">
+    <div class="modal-content">
+      <h3>Cart</h3>
+      <p id="cartItems"></p>
+      <p>Order via WhatsApp: <a href="https://wa.me/923202091398" target="_blank">+92 320 2091398</a></p>
+      <button onclick="toggleCart()">Close</button>
+    </div>
+  </div>
+
   <footer>
     <p>Order via WhatsApp: <a href="https://wa.me/923202091398" style="color: #ffa41c; text-decoration: underline;">+92 320 2091398</a></p>
     <p>Cash on Delivery & Prepayment Available</p>
@@ -163,13 +219,29 @@
   </footer>
 
   <script>
+    let cart = [];
     function addToCart(item) {
-      alert(item + ' added to cart. To order, contact on WhatsApp.');
+      cart.push(item);
+      alert(item + ' added to cart.');
+      updateCartDisplay();
+    }
+    function toggleCart() {
+      const modal = document.getElementById('cartModal');
+      modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+    }
+    function updateCartDisplay() {
+      const cartItems = document.getElementById('cartItems');
+      cartItems.innerHTML = cart.length ? cart.join('<br>') : 'Your cart is empty.';
     }
   </script>
 </body>
 </html>
 
+    
+   
+
+
+     
      
  
   
