@@ -1,243 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lactaunica </title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lactaunica - Your Tech Store</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
     }
     header {
-      background-color: #232f3e;
+      background-color: #0d47a1;
       color: white;
-      padding: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      padding: 15px;
+      text-align: center;
       position: sticky;
       top: 0;
-      z-index: 1000;
-    }
-    header .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-    header .search-bar input {
-      width: 300px;
-      padding: 0.5rem;
-      border: none;
-    }
-    header .icons {
-      font-size: 1.2rem;
-      display: flex;
-      gap: 20px;
-      cursor: pointer;
-    }
-    header .icons div {
-      position: relative;
+      z-index: 10;
     }
     nav {
-      background-color: #37475a;
-      color: white;
       display: flex;
-      padding: 0.5rem 1rem;
-      overflow-x: auto;
-    }
-    nav a {
-      margin-right: 1.5rem;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background-color: #1976d2;
       color: white;
-      text-decoration: none;
-      font-size: 0.9rem;
     }
-    .slider {
-      position: relative;
+    nav .logo {
+      font-weight: bold;
+      font-size: 20px;
+    }
+    nav .cart {
+      cursor: pointer;
+    }
+    .banner {
       width: 100%;
-      height: 300px;
-      overflow: hidden;
-    }
-    .slides {
-      display: flex;
-      width: 300%;
-      height: 100%;
-      animation: slide 15s infinite;
-    }
-    .slide {
-      width: 100%;
-      flex-shrink: 0;
-      background-size: cover;
-      background-position: center;
-    }
-    @keyframes slide {
-      0% { transform: translateX(0); }
-      33% { transform: translateX(-100%); }
-      66% { transform: translateX(-200%); }
-      100% { transform: translateX(0); }
-    }
-    .section {
-      padding: 1rem;
-    }
-    .section h2 {
-      margin-bottom: 1rem;
+      max-height: 450px;
+      object-fit: cover;
     }
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
     }
-    .product {
+    .product-card {
       background: white;
-      border-radius: 5px;
-      padding: 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      padding: 10px;
       text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    .product img {
-      width: 100%;
+    .product-card img {
+      max-width: 100%;
       height: 150px;
       object-fit: contain;
     }
-    .product h3 {
-      font-size: 1rem;
-      margin: 0.5rem 0;
+    .product-card a {
+      text-decoration: none;
+      color: #0d47a1;
     }
-    .product button {
-      background-color: #ffa41c;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 3px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    footer {
-      background-color: #232f3e;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-    #cartModal {
+    .cart-modal, .checkout-modal {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
       justify-content: center;
       align-items: center;
     }
-    #cartModal .modal-content {
+    .modal-content {
       background: white;
-      padding: 2rem;
-      border-radius: 8px;
-      text-align: left;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+    }
+    .modal-content h2 {
+      margin-top: 0;
+    }
+    input, select, button {
+      width: 100%;
+      margin: 5px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #0d47a1;
+      color: white;
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">Lactaunica</div>
-    <div class="search-bar">
-      <input type="text" placeholder="Search for products...">
-    </div>
-    <div class="icons">
-      <div onclick="alert('Account system coming soon!')"><i class="fas fa-user"></i></div>
-      <div onclick="toggleCart()"><i class="fas fa-shopping-cart"></i></div>
-    </div>
+    <h1>Lactaunica - Online Tech Store</h1>
   </header>
-
   <nav>
-    <a href="#">Watches</a>
-    <a href="#">Earbuds</a>
-    <a href="#">Chargers</a>
-    <a href="#">Cables</a>
-    <a href="#">Accessories</a>
+    <div class="logo">Lactaunica</div>
+    <div class="cart" onclick="showCart()">🛒 Cart (<span id="cart-count">0</span>)</div>
   </nav>
 
-  <div class="slider">
-    <div class="slides">
-      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1606813902760-8e93fb52e222?auto=format&fit=crop&w=1200&q=80');"></div>
-      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=1200&q=80');"></div>
-      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1589902713626-9b63b8b164e1?auto=format&fit=crop&w=1200&q=80');"></div>
+  <img src="Blue%20and%20White%20Bold%20Watch%20Sale%20Facebook%20Shops%20Ad.png" class="banner" alt="Sale Banner">
+
+  <section class="products">
+    <div class="product-card">
+      <a href="product-watch1.html">
+        <img src="https://via.placeholder.com/200x150?text=Watch+1" alt="Watch">
+        <h3>Classic Watch</h3>
+        <p>PKR 4500</p>
+      </a>
+      <button onclick="addToCart('Classic Watch', 4500)">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <a href="product-earbuds1.html">
+        <img src="https://via.placeholder.com/200x150?text=Earbuds" alt="Earbuds">
+        <h3>Wireless Earbuds</h3>
+        <p>PKR 2800</p>
+      </a>
+      <button onclick="addToCart('Wireless Earbuds', 2800)">Add to Cart</button>
+    </div>
+  </section>
+
+  <div class="cart-modal" id="cart-modal">
+    <div class="modal-content">
+      <h2>Your Cart</h2>
+      <ul id="cart-items"></ul>
+      <p>Total: PKR <span id="total-price">0</span></p>
+      <button onclick="checkout()">Checkout</button>
+      <button onclick="closeCart()">Close</button>
     </div>
   </div>
 
-  <section class="section">
-    <h2>Top Picks for You</h2>
-    <div class="products">
-      <div class="product">
-        <img src="https://via.placeholder.com/150x150?text=Watch" alt="Watch">
-        <h3>Smart Watch</h3>
-        <button onclick="addToCart('Smart Watch')">Add to Cart</button>
-      </div>
-      <div class="product">
-        <img src="https://via.placeholder.com/150x150?text=Earbuds" alt="Earbuds">
-        <h3>Wireless Earbuds</h3>
-        <button onclick="addToCart('Wireless Earbuds')">Add to Cart</button>
-      </div>
-      <div class="product">
-        <img src="https://via.placeholder.com/150x150?text=Charger" alt="Charger">
-        <h3>Fast Charger</h3>
-        <button onclick="addToCart('Fast Charger')">Add to Cart</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Electronics & Accessories</h2>
-    <div class="products">
-      <div class="product">
-        <img src="https://via.placeholder.com/150x150?text=Cable" alt="Cable">
-        <h3>USB-C Cable</h3>
-        <button onclick="addToCart('USB-C Cable')">Add to Cart</button>
-      </div>
-      <div class="product">
-        <img src="https://via.placeholder.com/150x150?text=Powerbank" alt="Powerbank">
-        <h3>Power Bank</h3>
-        <button onclick="addToCart('Power Bank')">Add to Cart</button>
-      </div>
-    </div>
-  </section>
-
-  <div id="cartModal">
+  <div class="checkout-modal" id="checkout-modal">
     <div class="modal-content">
-      <h3>Cart</h3>
-      <p id="cartItems"></p>
-      <p>Order via WhatsApp: <a href="https://wa.me/923202091398" target="_blank">+92 320 2091398</a></p>
-      <button onclick="toggleCart()">Close</button>
+      <h2>Checkout</h2>
+      <input type="text" id="name" placeholder="Your Name">
+      <input type="text" id="phone" placeholder="Phone Number">
+      <input type="text" id="address" placeholder="Address">
+      <select id="city">
+        <option value="">Select City</option>
+        <option>Lahore</option>
+        <option>Karachi</option>
+        <option>Islamabad</option>
+        <option>Rawalpindi</option>
+        <option>Multan</option>
+      </select>
+      <button onclick="placeOrder()">Place Order (via WhatsApp)</button>
+      <button onclick="closeCheckout()">Cancel</button>
     </div>
   </div>
 
   <footer>
-    <p>Order via WhatsApp: <a href="https://wa.me/923202091398" style="color: #ffa41c; text-decoration: underline;">+92 320 2091398</a></p>
-    <p>Cash on Delivery & Prepayment Available</p>
     <p>&copy; 2025 Lactaunica. All rights reserved.</p>
   </footer>
 
   <script>
     let cart = [];
-    function addToCart(item) {
-      cart.push(item);
-      alert(item + ' added to cart.');
-      updateCartDisplay();
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      document.getElementById('cart-count').innerText = cart.length;
     }
-    function toggleCart() {
-      const modal = document.getElementById('cartModal');
-      modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+
+    function showCart() {
+      const modal = document.getElementById('cart-modal');
+      modal.style.display = 'flex';
+      const cartItems = document.getElementById('cart-items');
+      const totalPrice = document.getElementById('total-price');
+      cartItems.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price;
+        const li = document.createElement('li');
+        li.innerText = `${item.name} - PKR ${item.price}`;
+        cartItems.appendChild(li);
+      });
+      totalPrice.innerText = total;
     }
-    function updateCartDisplay() {
-      const cartItems = document.getElementById('cartItems');
-      cartItems.innerHTML = cart.length ? cart.join('<br>') : 'Your cart is empty.';
+
+    function closeCart() {
+      document.getElementById('cart-modal').style.display = 'none';
+    }
+
+    function checkout() {
+      closeCart();
+      document.getElementById('checkout-modal').style.display = 'flex';
+    }
+
+    function closeCheckout() {
+      document.getElementById('checkout-modal').style.display = 'none';
+    }
+
+    function placeOrder() {
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const address = document.getElementById('address').value;
+      const city = document.getElementById('city').value;
+      const items = cart.map(item => `${item.name} (PKR ${item.price})`).join(', ');
+      const total = cart.reduce((acc, item) => acc + item.price, 0);
+      const message = `Order Details:\nName: ${name}\nPhone: ${phone}\nAddress: ${address}, ${city}\nItems: ${items}\nTotal: PKR ${total}`;
+      const whatsappLink = `https://wa.me/923202091398?text=${encodeURIComponent(message)}`;
+      window.open(whatsappLink, '_blank');
     }
   </script>
 </body>
 </html>
 
-    
    
 
 
